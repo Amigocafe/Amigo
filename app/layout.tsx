@@ -70,6 +70,9 @@ export async function generateMetadata(): Promise<Metadata> {
         'x-default': siteUrl,
       },
     },
+    verification: {
+      google: 'GCbSHN7owNKc6IxTDdqq7pXTGkNA8AMCM5TqtJ6oxJY',
+    },
     robots: indexable
       ? {
           index: true,
