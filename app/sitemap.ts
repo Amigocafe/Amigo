@@ -1,24 +1,39 @@
 import type { MetadataRoute } from "next"
-import { getSeo, getHomepage } from "@/lib/admin/queries"
+import { getSeo, getContentTimestamps } from "@/lib/admin/queries"
 import { resolveSiteUrl } from "@/lib/seo/site"
 
+// Always render fresh so <lastmod> reflects the current database state.
+// This is the signal Google uses to recrawl pages when content changes.
+export const revalidate = 0
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [seo, homepage] = await Promise.all([getSeo(), getHomepage()])
+  const [seo, ts] = await Promise.all([getSeo(), getContentTimestamps()])
   const baseUrl = resolveSiteUrl(seo)
-  const lastModified = homepage?.updated_at ? new Date(homepage.updated_at) : new Date()
 
   return [
     {
       url: baseUrl,
-      lastModified,
+      lastModified: ts.home,
       changeFrequency: "weekly",
       priority: 1,
+      alternates: {
+        languages: {
+          ar: baseUrl,
+          en: baseUrl,
+        },
+      },
     },
     {
       url: `${baseUrl}/menu`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.8,
+      lastModified: ts.menu,
+      changeFrequency: "daily",
+      priority: 0.9,
+      alternates: {
+        languages: {
+          ar: `${baseUrl}/menu`,
+          en: `${baseUrl}/menu`,
+        },
+      },
     },
   ]
 }

@@ -11,6 +11,7 @@ export type CategoryRow = {
   sort_order: number
   active: boolean
   created_at: string
+  updated_at: string
 }
 
 export type MenuItemRow = {
@@ -27,6 +28,7 @@ export type MenuItemRow = {
   available: boolean
   sort_order: number
   created_at: string
+  updated_at: string
 }
 
 export type HeroContent = {

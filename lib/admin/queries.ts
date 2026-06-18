@@ -42,6 +42,37 @@ export async function getMenuItems(): Promise<MenuItemRow[]> {
   return (data ?? []) as MenuItemRow[]
 }
 
+/**
+ * Latest "last modified" timestamps used to drive accurate <lastmod> values
+ * in the sitemap. Keeping these fresh is what tells Google to recrawl the
+ * affected page when menu items, categories, or homepage content change.
+ */
+export async function getContentTimestamps(): Promise<{
+  menu: Date
+  home: Date
+}> {
+  const supabase = await createClient()
+  const fallback = new Date()
+
+  const [items, cats, home, settings] = await Promise.all([
+    supabase.from("menu_items").select("updated_at").order("updated_at", { ascending: false }).limit(1).maybeSingle(),
+    supabase.from("categories").select("updated_at").order("updated_at", { ascending: false }).limit(1).maybeSingle(),
+    supabase.from("homepage_content").select("updated_at").eq("id", 1).maybeSingle(),
+    supabase.from("site_settings").select("updated_at").eq("id", 1).maybeSingle(),
+  ])
+
+  const toDate = (v?: string | null) => (v ? new Date(v) : null)
+  const latest = (...dates: (Date | null)[]) => {
+    const valid = dates.filter((d): d is Date => d instanceof Date && !Number.isNaN(d.getTime()))
+    return valid.length ? new Date(Math.max(...valid.map((d) => d.getTime()))) : fallback
+  }
+
+  const menuTs = latest(toDate(items.data?.updated_at), toDate(cats.data?.updated_at), toDate(home.data?.updated_at))
+  const homeTs = latest(toDate(home.data?.updated_at), toDate(settings.data?.updated_at))
+
+  return { menu: menuTs, home: homeTs }
+}
+
 export async function getHomepage(): Promise<HomepageRow | null> {
   const supabase = await createClient()
   const { data, error } = await supabase

@@ -22,7 +22,7 @@ export function resolveSiteUrl(seo?: SeoRow | null): string {
   const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL
   if (vercel) return `https://${stripTrailingSlash(vercel)}`
 
-  return "https://amigo.cafe"
+  return "https://amigocafé.com"
 }
 
 function stripTrailingSlash(url: string): string {
