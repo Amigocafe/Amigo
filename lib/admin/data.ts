@@ -217,7 +217,7 @@ export const seoDefaults = {
     'أميجو كافيه. قهوة مختصة محمّصة بحب. ادخل، خفّف السرعة، وتذوّق الرحلة من الحبة للفنجان.',
   keywords: 'قهوة، كافيه، بلايستيشن، بلبيس، الشرقية، إسبريسو، قهوة مختصة',
   ogImage: '/images/interior.webp',
-  canonical: 'https://amigo.cafe',
+  canonical: 'https://amigocafé.com',
   indexable: true,
 }
 
@@ -225,7 +225,7 @@ export const seoDefaults = {
 export const adminProfile = {
   name: 'سيد المعلم',
   role: 'مدير عام',
-  email: 'sayed@amigo.cafe',
+email: 'sayed@amigocafé.com',
   phone: '+20 100 123 4567',
   joined: 'انضم في يناير 2026',
   avatar: '/images/barista.webp',
@@ -249,8 +249,8 @@ export type TeamMember = {
 }
 
 export const teamMembers: TeamMember[] = [
-  { id: 't1', name: 'سيد المعلم', email: 'sayed@amigo.cafe', role: 'مدير عام', active: true },
-  { id: 't2', name: 'منة حسن', email: 'mona@amigo.cafe', role: 'محرر منيو', active: true },
-  { id: 't3', name: 'كريم فؤاد', email: 'karim@amigo.cafe', role: 'كاشير', active: true },
-  { id: 't4', name: 'نور علي', email: 'nour@amigo.cafe', role: 'مشاهدة فقط', active: false },
+  { id: 't1', name: 'سيد المعلم', email: 'sayed@amigocafé.com', role: 'مدير عام', active: true },
+  { id: 't2', name: 'منة حسن', email: 'mona@amigocafé.com', role: 'محرر منيو', active: true },
+  { id: 't3', name: 'كريم فؤاد', email: 'karim@amigocafé.com', role: 'كاشير', active: true },
+  { id: 't4', name: 'نور علي', email: 'nour@amigocafé.com', role: 'مشاهدة فقط', active: false },
 ]

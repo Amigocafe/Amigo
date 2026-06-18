@@ -130,7 +130,7 @@ export function SeoManager({ seo: initial }: { seo: SeoRow | null }) {
                   <Image src={seo.og_image || "/placeholder.svg"} alt="صورة المشاركة" fill sizes="500px" className="object-cover" />
                 </div>
                 <div className="bg-muted/40 px-4 py-3">
-                  <p className="text-xs uppercase text-muted-foreground" dir="ltr">amigo.cafe</p>
+                  <p className="text-xs uppercase text-muted-foreground" dir="ltr">amigocafé.com</p>
                   <p className="mt-0.5 text-sm font-semibold text-foreground line-clamp-1">{seo.title_ar}</p>
                   <p className="text-xs text-muted-foreground line-clamp-2 text-pretty">{seo.description_ar}</p>
                 </div>
